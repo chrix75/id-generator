@@ -17,7 +17,7 @@ func TestGenerateUniqueID(t *testing.T) {
 	// then
 	expectedID := ID{
 		MachineID: 1,
-		TimeValue: 141868800000,
+		TimeValue: 1728000000,
 		Counter:   1,
 	}
 
@@ -36,7 +36,7 @@ func TestGenerateTwoUniquesID(t *testing.T) {
 	// then
 	expectedID := ID{
 		MachineID: 1,
-		TimeValue: 141868800000,
+		TimeValue: 1728000000,
 		Counter:   2,
 	}
 
@@ -57,7 +57,7 @@ func TestResetCounter(t *testing.T) {
 	// then
 	expectedID := ID{
 		MachineID: 1,
-		TimeValue: 141868800000,
+		TimeValue: 1728000000,
 		Counter:   1,
 	}
 
@@ -68,7 +68,7 @@ func TestBuildIDValue(t *testing.T) {
 	// given
 	id := ID{
 		MachineID: 1,
-		TimeValue: 141868800000,
+		TimeValue: 1728000000,
 		Counter:   1,
 	}
 
@@ -76,7 +76,7 @@ func TestBuildIDValue(t *testing.T) {
 	value, _ := id.GetValue()
 
 	// then
-	expectedValue := uint64(595040875317297153)
+	expectedValue := uint64(7247757314097153)
 	assert.Equal(t, expectedValue, value)
 }
 
