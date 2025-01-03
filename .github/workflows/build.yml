@@ -1,0 +1,29 @@
+name: Build Go Application
+
+on:
+  release:
+    types: [created]
+
+jobs:
+  build:
+    name: Generate cross-platform builds
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout the repository
+        uses: actions/checkout@v2
+
+      - name: Generate build files
+        uses: thatisuday/go-cross-build@v1
+        with:
+          platforms: 'linux/amd64, darwin/amd64, darwin/arm64, windows/amd64'
+          package: ''  # Leave empty if the module itself is a Go package
+          name: 'id-generator'  # Replace with your application name
+          compress: 'true'  # Set to true to create compressed tar.gz files
+          dest: 'dist'  # Output directory for build files
+
+      - name: Upload Release Artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: release-artifacts
+          path: dist/*
