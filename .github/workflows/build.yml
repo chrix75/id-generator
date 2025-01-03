@@ -26,11 +26,11 @@ jobs:
         run: echo "::set-output name=TAG_NAME::$(echo ${{ github.ref }} | sed 's/refs\/tags\///')"
 
       - name: Build
-        run: go build -o id-generator-${{ matrix.os }}-${{ matrix.arch }}-${{ steps.tag_name.outputs.TAG_NAME }} ./api/main.go
+        run: go build -o id-generator-${{ steps.tag_name.outputs.TAG_NAME }}-${{ matrix.os }}-${{ matrix.arch }} ./api/main.go
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: id-generator-${{ matrix.os }}-${{ matrix.arch }}-${{ steps.tag_name.outputs.TAG_NAME }}
-          path: id-generator-${{ matrix.os }}-${{ matrix.arch }}-${{ steps.tag_name.outputs.TAG_NAME }}
+          name: id-generator-${{ steps.tag_name.outputs.TAG_NAME }}-${{ matrix.os }}-${{ matrix.arch }}
+          path: id-generator-${{ steps.tag_name.outputs.TAG_NAME }}-${{ matrix.os }}-${{ matrix.arch }}
 
