@@ -2,8 +2,8 @@ name: Build Go Binary
 
 on:
   push:
-    tags:
-      - 'v*' # Trigger on pushes with tags starting with 'v'
+    branches:
+      - main
 
 jobs:
   build-binaries:
@@ -21,16 +21,12 @@ jobs:
         with:
           go-version: 1.23
 
-      - name: Get Tag Name
-        id: tag_name
-        run: echo "::set-output name=TAG_NAME::$(echo ${{ github.ref }} | sed 's/refs\/tags\///' | sed 's/\./_/g')"
-
       - name: Build
-        run: go build -o id-generator-${{ steps.tag_name.outputs.TAG_NAME }}-${{ matrix.os }}-${{ matrix.arch }} ./api/main.go
+        run: go build -o id-generator-${{ matrix.os }}-${{ matrix.arch }} ./api/main.go
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: id-generator-${{ steps.tag_name.outputs.TAG_NAME }}-${{ matrix.os }}-${{ matrix.arch }}
-          path: id-generator-${{ steps.tag_name.outputs.TAG_NAME }}-${{ matrix.os }}-${{ matrix.arch }}
+          name: id-generator-${{ matrix.os }}-${{ matrix.arch }}
+          path: id-generator-${{ matrix.os }}-${{ matrix.arch }}
 
