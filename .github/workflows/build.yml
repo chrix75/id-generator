@@ -29,17 +29,3 @@ jobs:
         with:
           name: id-generator-${{ matrix.os }}-${{ matrix.arch }}
           path: id-generator-${{ matrix.os }}-${{ matrix.arch }}
-
-      - name: Create Release
-        uses: softprops/action-gh-release@v1
-        with:
-          tag_name: ${{ github.ref }}
-          name: Release ${{ github.ref }}
-          body: "This is a new release." # Customize your release notes
-
-      - name: Upload Release Asset
-        uses: softprops/action-gh-release@v1
-        with:
-          tag_name: ${{ github.ref }}
-          name: id-generator-${{ matrix.os }}-${{ matrix.arch }}
-          file: id-generator-${{ matrix.os }}-${{ matrix.arch }}
