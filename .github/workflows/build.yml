@@ -7,7 +7,11 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+        arch: [amd64, arm64]
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -18,10 +22,10 @@ jobs:
           go-version: 1.23
 
       - name: Build
-        run: go build -o id-generator ./api/main.go
+        run: go build -o id-generator-${{ matrix.os }}-${{ matrix.arch }} ./api/main.go
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: id-generator
-          path: id-generator
+          name: id-generator-${{ matrix.os }}-${{ matrix.arch }}
+          path: id-generator-${{ matrix.os }}-${{ matrix.arch }}
