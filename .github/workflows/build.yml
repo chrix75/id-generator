@@ -1,31 +1,27 @@
-name: Build Go Application
+name: Build Go Binary
 
 on:
-  release:
-    types: [created]
+  push:
+    branches:
+      - main
 
 jobs:
   build:
-    name: Generate cross-platform builds
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout the repository
-        uses: actions/checkout@v2
+      - name: Checkout code
+        uses: actions/checkout@v3
 
       - name: Set up Go
-        uses: actions/setup-go@v2
+        uses: actions/setup-go@v5
         with:
-          go-version: '1.23'  # Specify your desired Go version
+          go-version: 1.23
 
-      - name: Build the application
-        working-directory: ./api  # Change to the directory containing main.go
-        run: go build -o id-generator .  # Replace 'myapp' with your desired output name
-        with:
-          platforms: 'linux/amd64, darwin/amd64, darwin/arm64, windows/amd64'
+      - name: Build
+        run: go build -o id-generator ./api/main.go
 
-      - name: Upload Release Artifacts
-        uses: actions/upload-artifact@v4
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v3
         with:
-          name: release-artifacts
-          path: dist/*
+          name: id-generator
+          path: id-generator
