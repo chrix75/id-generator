@@ -13,15 +13,16 @@ jobs:
       - name: Checkout the repository
         uses: actions/checkout@v2
 
-      - name: Generate build files
-        uses: thatisuday/go-cross-build@v1
+      - name: Set up Go
+        uses: actions/setup-go@v2
+        with:
+          go-version: '1.23'  # Specify your desired Go version
+
+      - name: Build the application
+        working-directory: ./api  # Change to the directory containing main.go
+        run: go build -o id-generator .  # Replace 'myapp' with your desired output name
         with:
           platforms: 'linux/amd64, darwin/amd64, darwin/arm64, windows/amd64'
-          package: './api'  # Leave empty if the module itself is a Go package
-          name: 'id-generator'  # Replace with your application name
-          compress: 'true'  # Set to true to create compressed tar.gz files
-          dest: 'dist'  # Output directory for build files
-
 
       - name: Upload Release Artifacts
         uses: actions/upload-artifact@v4
