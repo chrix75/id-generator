@@ -6,7 +6,7 @@ on:
       - 'v*' # Trigger on pushes with tags starting with 'v'
 
 jobs:
-  build:
+  build-binaries:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
