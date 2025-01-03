@@ -23,7 +23,7 @@ jobs:
 
       - name: Get Tag Name
         id: tag_name
-        run: echo "::set-output name=TAG_NAME::$(echo ${{ github.ref }} | sed 's/refs\/tags\///')"
+        run: echo "::set-output name=TAG_NAME::$(echo ${{ github.ref }} | sed 's/refs\/tags\///' | sed 's/\./_/g')"
 
       - name: Build
         run: go build -o id-generator-${{ steps.tag_name.outputs.TAG_NAME }}-${{ matrix.os }}-${{ matrix.arch }} ./api/main.go
