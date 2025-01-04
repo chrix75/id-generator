@@ -1,6 +1,11 @@
 # Use the official Go image as the base
 FROM golang:1.23-alpine AS builder
 
+LABEL version="1.0.0"
+LABEL description="API Rest Service provides an unique global ID"
+LABEL license="MIT"
+LABEL source="https://github.com/chrix75/id-generator"
+
 # Set the working directory inside the container
 WORKDIR /app
 
