@@ -113,7 +113,7 @@ purposes.
 ## Run by using Docker image
 
    ```bash
-   docker run -e ID_GENERATOR_MACHINE_ID=1 -p 8080:8080  csperandio/id-generator:1.0.0
+   docker run -e ID_GENERATOR_MACHINE_ID=1 -p 8080:8080  csperandio/id-generator:1.1.0
    ```
 
 The command above starts an instance of id-generator with a machine ID set to 1.
