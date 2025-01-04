@@ -9,7 +9,7 @@ import (
 )
 
 func TestGetID(t *testing.T) {
-	router := setupRouter()
+	router := setupRouter(0)
 
 	w := httptest.NewRecorder()
 	req, _ := http.NewRequest(http.MethodGet, "/api/id", nil)
