@@ -118,6 +118,13 @@ purposes.
 
 The command above starts an instance of id-generator with a machine ID set to 1.
 
+## Run binary
+
+Binaries have been built for macOs, Linux and Windows. They are on the release page of this project.
+
+> Only macOS and Linux amd64 have been tested. However, the others should work.
+
+
 ## API Endpoints
 
 ### `/api/id`
